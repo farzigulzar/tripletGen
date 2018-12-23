@@ -28,12 +28,17 @@ bool isodd(int a)
 	}
 }
 
-void followprime()
+void followprime(int a)
 {
+	int z[3];
+	z[0]=a;
+	z[1]=((a*a)+1)/2;
+	z[2]=((a*a)-1)/2;
+	cout<<"The ordered triplet is ["<<z[0]<<","<<z[1]<<","<<z[2]<<"]";
 //	return 0;
 }
 
-void followNotprime()
+void followNotprime(int a)
 {
 //	return 0
 }
@@ -45,9 +50,10 @@ int main()
 	switch(isprime(n))
 	{		
 		case 0:
-			followNotprime();
+			followNotprime(n);
 		case 1:
-			followprime();
+			cout<<"Only 1 triplet is found\n";
+			followprime(n);
 		
 	}
 			
