@@ -1,17 +1,18 @@
 #include<iostream>
 #include<math.h>
 #include<stdlib.h>
+
 using namespace std;
 
 struct node				//linked list data structure
 {
-	int data;
+	long data;
 	struct node * link;
 };
 
 struct node * HEAD;
 
-void append(int d)			//function to append the list of prime numbers
+void append(long d)			//function to append the list of prime numbers
 {
 	struct node * temp=(struct node *)malloc (sizeof(struct node));
 	temp->data=d;
@@ -21,20 +22,23 @@ void append(int d)			//function to append the list of prime numbers
 
 void display()		//displays the linked list
 {
+	long len=0;
 	struct node * temp;
 	temp=HEAD;
 	while(temp!=NULL)
 	{
+		len++;
 		cout<<temp->data<<endl;
 		temp=temp->link;
 	}
+	cout<<"length is "<<len;
 }
 
 
-bool isprime(int a)			//ISprime Number
+bool isprime(long a)			//ISprime Number
 {
-	int flag=0;
-	for(int i=2;i<(int )sqrt(a)+1;i++)
+	long flag=0;
+	for(unsigned int i=2;i<(unsigned int )sqrt(a)+1;i++)
 	{
 		if(a%i==0)
 		{
@@ -46,7 +50,7 @@ bool isprime(int a)			//ISprime Number
 }
 
 
-int nextprime(int a)		//gives the next prime number
+long nextprime(long a)		//gives the next prime number
 {
 	a++;
 	if(isprime(a))
@@ -59,10 +63,10 @@ int nextprime(int a)		//gives the next prime number
 	}
 }
 
-void followNotprime(int a)			//follow if the number from main is not prime
+void followNotprime(long a)			//follow if the number from main is not prime
 {
-	int t=a;
-	int temp=2;
+	long t=a;
+	long temp=2;
 	for(temp=2;temp<(a/2);temp=nextprime(temp))
 	{
 		while(a%temp==0)
@@ -75,9 +79,9 @@ void followNotprime(int a)			//follow if the number from main is not prime
 	display();
 }
 
-void followprime(int a)			//function to print pythagorean triplets of the number
+void followprime(long a)			//function to prlong pythagorean triplets of the number
 {
-	int z[3];
+	long z[3];
 	z[0]=a;
 	z[1]=((a*a)+1)/2;
 	z[2]=((a*a)-1)/2;
@@ -89,7 +93,7 @@ void followprime(int a)			//function to print pythagorean triplets of the number
 int main()
 {
 	HEAD=NULL;
-	int n;
+	long n;
 	cin>>n;
 	switch(isprime(n))
 	{		
