@@ -1,8 +1,37 @@
 #include<iostream>
 #include<math.h>
+#include<stdlib.h>
 using namespace std;
 
-bool isprime(int a)
+struct node				//linked list data structure
+{
+	int data;
+	struct node * link;
+};
+
+struct node * HEAD;
+
+void append(int d)			//function to append the list of prime numbers
+{
+	struct node * temp=(struct node *)malloc (sizeof(struct node));
+	temp->data=d;
+	temp->link=HEAD;
+	HEAD=temp;
+}
+
+void display()		//displays the linked list
+{
+	struct node * temp;
+	temp=HEAD;
+	while(temp!=NULL)
+	{
+		cout<<temp->data<<endl;
+		temp=temp->link;
+	}
+}
+
+
+bool isprime(int a)			//ISprime Number
 {
 	int flag=0;
 	for(int i=2;i<(int )sqrt(a)+1;i++)
@@ -16,19 +45,37 @@ bool isprime(int a)
 	return true;
 }
 
-bool isodd(int a)
+
+int nextprime(int a)		//gives the next prime number
 {
-	if(a%2==0)
+	a++;
+	if(isprime(a))
 	{
-		return false;
+		return a;
 	}
 	else
 	{
-		return true;
+		return nextprime(a);
 	}
 }
 
-void followprime(int a)
+void followNotprime(int a)			//follow if the number from main is not prime
+{
+	int t=a;
+	int temp=2;
+	for(temp=2;temp<(a/2);temp=nextprime(temp))
+	{
+		while(a%temp==0)
+		{
+			append(temp);
+			a=a/temp;
+		}
+		a=t;
+	}
+	display();
+}
+
+void followprime(int a)			//function to print pythagorean triplets of the number
 {
 	int z[3];
 	z[0]=a;
@@ -38,22 +85,21 @@ void followprime(int a)
 //	return 0;
 }
 
-void followNotprime(int a)
-{
-//	return 0
-}
 
 int main()
 {
+	HEAD=NULL;
 	int n;
 	cin>>n;
 	switch(isprime(n))
 	{		
 		case 0:
 			followNotprime(n);
+			break;
 		case 1:
 			cout<<"Only 1 triplet is found\n";
 			followprime(n);
+			break;
 		
 	}
 			
